@@ -1,14 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>  
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Comp426 Final Project</title>
-    </head>
-    <body>
-        <div>
-            <h1>Stock News</h1>
-            <p>Filter for stock specific news based off price movements!</p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="node_modules/bulma/css/bulma.css" />
+    <link rel="stylesheet" href="custom_style.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Shrikhand&display=swap" rel="stylesheet">
+    <title>426 Project</title>
+</head>
+<body>
+<section class="section">
+    <div class="container">
+        <div class="content has-text-centered">
+            <h1 class="title has-text-info is-family-secondary">Helping Traders Filter For Stock Specific News</h1>
+            <h5 class="subtitle has-text-grey is-italic">Find the news that matters</h5>
         </div>
-    </body>
+        <div class="tabs is-medium is-centered">
+            <ul>
+                <li class="is-active"><a>News Feed Search</a></li>
+                <li><a>Top News</a></li>
+                <li><a>Watch Lists</a></li>
+                <li><a>Saved Feeds</a></li>
+            </ul>
+        </div>
+        <div class="field has-addons has-addons-centered">
+            <p class="control">
+              <span class="select">
+                <select>
+                  <option>% Change in Price</option>
+                  <option>10/option>
+                  <option>50</option>
+                </select>
+              </span>
+            </p>
+            <p class="control">
+              <input class="input" type="text" placeholder="Stock Ticker (eg. AAPL)">
+            </p>
+            <p class="control">
+              <a class="button is-primary">
+                Search For News
+              </a>
+            </p>
+          </div>
+
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            <div class="column">
+                <h1 class="title">Login</h1>
+                <form>
+                    <div class="field">
+                        <label class="label">Username</label>
+                        <div class="control">
+                            <input class="input" type="text" placeholder="Cookie Monster" name="username">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Password</label>
+                        <div class="control">
+                            <input class="input" type="password" placeholder="password123" name="password">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <label class="checkbox">
+                                <input type="checkbox" name="remember">
+                                Remember login?
+                            </label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <input class="button is-dark" type="submit"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="column">
+                <h1 class="title">Signup</h1>
+                <form>
+                    <div class="field">
+                        <label class="label">Username</label>
+                        <div class="control">
+                            <input class="input" type="text" placeholder="Cookie Monster 2.0" name="username">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Password</label>
+                        <div class="control">
+                            <input class="input" type="password" placeholder="password12345">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Repeat Password</label>
+                        <div class="control">
+                            <input class="input" type="password" placeholder="password12345" name="password">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="control">
+                            <input class="button is-dark" type="submit"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
 </html>
