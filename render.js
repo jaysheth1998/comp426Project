@@ -13,12 +13,6 @@ export async function generateDates(e) {
         url: url,
         
       });
-
-    
-
-    
-
-
       //console.log(result.data["Weekly Time Series"]);
 
       //console.log(result.data["Time Series (Daily)"]["2020-07-02"]);
