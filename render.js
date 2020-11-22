@@ -3,22 +3,26 @@
 // $(function () {
 export async function generateDates(e) {
     e.preventDefault();
+   // $('#listOfButtons').empty();
+   $('#listOfButtons').replaceWith(`<div id = "listOfButtons"></div>`);
     
-    
-    let ticker = document.getElementById("enter").value;
+    let ticker = document.getElementById("ticker").value;
     if(ticker!=undefined & ticker!=""){
-    const key = '7PY7444P5U18HQZM';
-    const url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol="+ticker+"&apikey="+key;
+    //const key = '7PY7444P5U18HQZM';
+    //const key = 'JL0PP4ILC96MGPUX';
+    const myKey = '51WDB58OFO8P247S';
+    const url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol="+ticker+"&apikey="+myKey;
     const result = await axios({
         method: 'get',
         url: url,
         
       });
+      console.log(result);
     
       //console.log(result.data["Weekly Time Series"]);
 
       //console.log(result.data["Time Series (Daily)"]["2020-07-02"]);
-      var d = new Date("2020-07-01");
+      //var d = new Date("2020-07-01");
       //var x = new Date("2020-11-21");
       //x = x.toISOString();
       //console.log(x);
@@ -33,15 +37,16 @@ export async function generateDates(e) {
 
       let dateArr = [];
       let exportArr =[];
+      var d = new Date();
+      d = d.toISOString().substring(0,10);
       
      
       for(let i = 0; i<100; i++){
          d = new Date(d);
-         //console.log(d);
-        d.setDate(d.getDate()+1);
+        d.setDate(d.getDate()-1);
         //let x = d;
         d = d.toISOString().substring(0,10);
-        //console.log(d);
+        console.log(d);
         if(result.data["Time Series (Daily)"][d]!=undefined){
 
         
@@ -87,7 +92,7 @@ export function dateButtons(x){
     for(let i =0; i <x.length; i++){
         
         let oneButton = x[i];
-        dateButtonList+=`<button id = "${oneButton}">${oneButton}</button>`;
+        dateButtonList+=`<button class = "thisButton" id = "${oneButton}">${oneButton}</button>`;
 
     }
     dateButtonList+=`</div>`;
@@ -100,17 +105,19 @@ export async function updateValue(){
     let update = `<div class="select is-multiple"><select id = "mo" multiple size="5">`;
 
     
-    let progress = document.getElementById("enter").value;
+    let progress = document.getElementById("ticker").value;
     if(progress !=''){
-
-    
-    const key = '7PY7444P5U18HQZM';
-    const url = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords="+progress+"&apikey="+key;
-    const result = await axios({
-        method: 'get',
-        url: url,
+        console.log("hi");
+        //const myKey = '51WDB58OFO8P247S';
+    // const key = 'JL0PP4ILC96MGPUX';
+        const myKey = '7PY7444P5U18HQZM';
+        const url = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords="+progress+"&apikey="+myKey;
+        const result = await axios({
+            method: 'get',
+            url: url,
         
       });
+      console.log(result);
      // console.log(result.data["bestMatches"][0]["1. symbol"]);
     if(result.data["bestMatches"]!=undefined){
 
@@ -128,7 +135,7 @@ export async function updateValue(){
 
 export async function changeFucntion(event){
     $('#mo').replaceWith(`<div id = "mo"></div>`);
-    $('#enter').val(event.target.value);
+    $('#ticker').val(event.target.value);
     
 
 }
@@ -136,16 +143,83 @@ export async function changeFucntion(event){
 //     return event
 // }
 
+export async function generateFeed(e) {
+    
+    e.preventDefault();
+    
+    let buttonDate = e.target.id;
+    console.log(buttonDate);
+    let priorDate = new Date(buttonDate);
+    priorDate.setDate(priorDate.getDate()-2);
+    priorDate = priorDate.toISOString().substring(0,10);
+    console.log(priorDate)
+
+    const $root = $('#newsFeed')
+    $root.empty();
+
+    // LOCAL RUN
+    //const myKey = "480cae414ceb43cbab94d9ab001bd7ec"
+
+    // SERVER RUN
+    const myKey = "c97e329f04a9821fe41a8f8bde77b7e6"
+
+    let ticker = document.getElementById('ticker').value;
+    console.log(ticker)
+
+    const feed = await axios({
+        method: 'get',                                                                                         
+        url: 'https://gnews.io/api/v4/search?q='+ticker+'&lang=en&country=us&in=title,description,content&from='+priorDate+'T22:34:26Z&to='+buttonDate+'T22:34:26Z&sortBy=relevance&token='+myKey,
+        // withCreditals: true                                                                                 
+    });                                                                                                                     
+    console.log(feed);
+    let posts = `<div id=articles>`;
+    if(feed.data.articles.length>0){
+        for(let i = 0; i < feed.data.articles.length; i++) {
+            if( feed.data.articles[i].title!=null && feed.data.articles[i].image!=null && feed.data.articles[i].description!= null && feed.data.articles[i].source != null) {
+ 
+            posts += `
+            <div class="card">
+                <header class="card-header">
+                    <h1 class="title"><a href="${feed.data.articles[i].url}" target="_blank">${feed.data.articles[i].title}</a></h1>
+                </header>
+                <div class="card-image">
+                    <figure class="image is-4by3">
+                        <img src="${feed.data.articles[i].image}">
+                    </figure>
+                </div>
+                <div class="card-content">
+                    <div class="content">
+                        ${feed.data.articles[i].description}
+                    </div>
+                </div>
+                <footer class="card-footer">
+                    <a href="${feed.data.articles[i].source.url} target="_blank" class="card-footer-item">Source: ${feed.data.articles[i].source.name}</a>
+                    <form method="get" name="form2" action="home.php"> 
+                        <a class="card-footer-item"><button name="save" type="submit"  value="${feed.data.articles[i].url}">Save Article <span class="icon is-medium"><i class="fa fa-heart"></i></span></button></a>
+                    </form>
+                </footer>
+            </div>
+            `
+                } 
+        }
+    } else {
+        posts += `<h1 class="title">Sorry no news on this date :/</h1>`
+    }
+    posts += `</div>`;
+    $root.append(posts);
+}
+
 export const renderSite = function() {
-    const $root = $('#root');
+    //const $root = $('#root');
     //const $root = $('#root');
     //$root.append(`<h2>YOOOOOOOOOO</h2>`);
 
     
     $(document).on('click', '#findDate', generateDates);
     
-    enter.addEventListener('input', updateValue);
+    ticker.addEventListener('input', updateValue);
     $(document).on('click', 'option',changeFucntion);
+    $(document).on('click','.thisButton', generateFeed);
     
    
 }

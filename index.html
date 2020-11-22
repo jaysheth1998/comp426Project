@@ -33,7 +33,7 @@
               </span>
             </p>
             <p class="control" id = "crazyVibes" >
-              <input class="input" type="text" placeholder="Stock Ticker (eg. AAPL)" id = "enter">
+              <input class="input" type="text" placeholder="Stock Ticker (eg. AAPL)" id = "ticker">
              
               <div id = "mo"></div>
             </p>
@@ -46,13 +46,16 @@
             
           </div>
           <div id = "listOfButtons"></div>
-          
-          
-
     </div>
 </section>
 
-    <div id = "root"></div>
+<section class="section">
+  <div class="container">
+      <div class="column is-half is-offset-one-quarter">
+          <div id="newsFeed"></div> 
+      </div> 
+  </div>
+</section> 
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="node_modules/axios/dist/axios.min.js"></script>
