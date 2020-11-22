@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="node_modules/bulma/css/bulma.css" />
+    <link rel="stylesheet" href="custom_style.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Shrikhand&display=swap" rel="stylesheet">
+    <title>426 Project</title>
+</head>
+<body>
+<section class="section">
+    <div class="container">
+        <div class="content has-text-centered">
+            <h1 class="title has-text-info is-family-secondary">Helping Traders Filter For Stock Specific News</h1>
+            <h5 class="subtitle has-text-grey is-italic">Find the news that matters</h5>
+        </div>
+        <div class="tabs is-medium is-centered">
+            <ul>
+                <li class="is-active"><a>News Feed Search</a></li>
+                <li><a>Top News</a></li>
+                <li><a>Watch Lists</a></li>
+                <li><a>Saved Feeds</a></li>
+            </ul>
+        </div>
+        <div class="field has-addons has-addons-centered">
+            <p class="control">
+              <span class="select">
+                <select>
+                  <option>% Change in Price</option>
+                  <option>10/option>
+                  <option>50</option>
+                </select>
+              </span>
+            </p>
+            <p class="control" id = "crazyVibes" >
+              <input class="input" type="text" placeholder="Stock Ticker (eg. AAPL)" id = "enter">
+             
+              <div id = "mo"></div>
+            </p>
+            
+            <p class="control">
+              <a class="button is-primary" id="findDate">
+                Search For News
+              </a>
+            </p>
+            
+          </div>
+          
+          
+
+    </div>
+</section>
+
+    <div id = "root"></div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="node_modules/axios/dist/axios.min.js"></script>
+<script type="module" src="render.js"></script>
+</body>
+</html>
