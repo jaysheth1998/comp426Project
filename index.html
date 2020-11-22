@@ -33,83 +33,29 @@
                 </select>
               </span>
             </p>
-            <p class="control">
-              <input class="input" type="text" placeholder="Stock Ticker (eg. AAPL)">
+            <p class="control" id = "crazyVibes" >
+              <input class="input" type="text" placeholder="Stock Ticker (eg. AAPL)" id = "enter">
+              <select id = "mo"></select>
+              <div id = "yo"></div>
             </p>
+            
             <p class="control">
-              <a class="button is-primary">
+              <a class="button is-primary" id="findDate">
                 Search For News
               </a>
             </p>
+            
           </div>
+          
+          
 
     </div>
 </section>
 
-<section class="section">
-    <div class="container">
-        <div class="columns">
-            <div class="column">
-                <h1 class="title">Login</h1>
-                <form>
-                    <div class="field">
-                        <label class="label">Username</label>
-                        <div class="control">
-                            <input class="input" type="text" placeholder="Cookie Monster" name="username">
-                        </div>
-                    </div>
-                    <div class="field">
-                        <label class="label">Password</label>
-                        <div class="control">
-                            <input class="input" type="password" placeholder="password123" name="password">
-                        </div>
-                    </div>
-                    <div class="field">
-                        <div class="control">
-                            <label class="checkbox">
-                                <input type="checkbox" name="remember">
-                                Remember login?
-                            </label>
-                        </div>
-                    </div>
-                    <div class="field">
-                        <div class="control">
-                            <input class="button is-dark" type="submit"/>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="column">
-                <h1 class="title">Signup</h1>
-                <form>
-                    <div class="field">
-                        <label class="label">Username</label>
-                        <div class="control">
-                            <input class="input" type="text" placeholder="Cookie Monster 2.0" name="username">
-                        </div>
-                    </div>
-                    <div class="field">
-                        <label class="label">Password</label>
-                        <div class="control">
-                            <input class="input" type="password" placeholder="password12345">
-                        </div>
-                    </div>
-                    <div class="field">
-                        <label class="label">Repeat Password</label>
-                        <div class="control">
-                            <input class="input" type="password" placeholder="password12345" name="password">
-                        </div>
-                    </div>
+    <div id = "root"></div>
 
-                    <div class="field">
-                        <div class="control">
-                            <input class="button is-dark" type="submit"/>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="node_modules/axios/dist/axios.min.js"></script>
+<script type="module" src="render.js"></script>
 </body>
 </html>
