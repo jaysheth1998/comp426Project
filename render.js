@@ -4,8 +4,9 @@
 export async function generateDates(e) {
     e.preventDefault();
     
+    
     let ticker = document.getElementById("enter").value;
-
+    if(ticker!=undefined & ticker!=""){
     const key = '7PY7444P5U18HQZM';
     const url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol="+ticker+"&apikey="+key;
     const result = await axios({
@@ -13,10 +14,14 @@ export async function generateDates(e) {
         url: url,
         
       });
+    
       //console.log(result.data["Weekly Time Series"]);
 
       //console.log(result.data["Time Series (Daily)"]["2020-07-02"]);
       var d = new Date("2020-07-01");
+      //var x = new Date("2020-11-21");
+      //x = x.toISOString();
+      //console.log(x);
       //var s = d.toISOString().substring(0,10);
       //console.log(s);
       //d.setDate(d.getDate()+1);
@@ -27,12 +32,14 @@ export async function generateDates(e) {
       //console.log(result.data["Time Series (Daily)"][s]);
 
       let dateArr = [];
+      let exportArr =[];
       
      
-      for(let i = 0; i<10; i++){
+      for(let i = 0; i<100; i++){
          d = new Date(d);
          //console.log(d);
         d.setDate(d.getDate()+1);
+        //let x = d;
         d = d.toISOString().substring(0,10);
         //console.log(d);
         if(result.data["Time Series (Daily)"][d]!=undefined){
@@ -41,52 +48,52 @@ export async function generateDates(e) {
         let openX = parseInt(result.data["Time Series (Daily)"][d]["1. open"]);
         let closeX = parseInt(result.data["Time Series (Daily)"][d]["4. close"]);
         //console.log(openX);
-        let expected = openX*1.01;
+        let change = document.getElementById("determineChange").value;
+        let changeX = change*0.01+1;
+        let expected = openX*changeX;
+        if(change>0){
+
+        
         if(closeX>=expected){
             //console.log("yes");
             dateArr.push(d);
+            //exportArr.push(x);
   
         }
-        else{
-            //console.log("no");
-        }
+    }
+        if(change<0){
+            if(closeX<=expected){
+                dateArr.push(d);
+                //exportArr.push(x);
+            }
+            
+
         }
     
     }
-    console.log(dateArr);
-     
-
-      //console.log(result.data["Time Series (Daily)"][]);
-
-      
-
-
-// let monthA = 1;
-// let day = 3;
-// let date = "2020-01-03";
-
-// for(let i = 0;i<10; i++){
-//      console.log(result.data["Weekly Time Series"]);
-
-//  }
-      
+    
+      }
+      console.log(dateArr);
+      //console.log(exportArr);
+      dateButtons(dateArr);
+    }
 
 }
 
 
+export function dateButtons(x){
+    let dateButtonList  = `<div>`;
 
+    for(let i =0; i <x.length; i++){
+        
+        let oneButton = x[i];
+        dateButtonList+=`<button id = "${oneButton}">${oneButton}</button>`;
 
+    }
+    dateButtonList+=`</div>`;
+    $('#listOfButtons').append(dateButtonList);
 
-// axios.get(url)
-// .then(res => {
-//   console.log(res.data);
-//   let stocks = _.flattenDeep( Array.from(res.data['Stock Quotes']).map((stock) => [{symbol: stock['1. symbol'], price: stock['2. price'], volume: stock['3. volume'], timestamp: stock['4. timestamp']}]) );
-//   console.log(stocks);
-  
-  
-// })
-// .catch(error => console.log(error))
-
+}
 
 
 export async function updateValue(){
@@ -110,7 +117,7 @@ export async function updateValue(){
     
     for(let i = 0; i<4; i++){
         if(result.data["bestMatches"][i]!=undefined){
-        update += `<option id = "${result.data["bestMatches"][i]["1. symbol"]}" value = ${result.data["bestMatches"][i]["1. symbol"]}>${result.data["bestMatches"][i]["1. symbol"]}:  ${result.data["bestMatches"][i]["2. name"]}</option>`;
+        update += `<option value = ${result.data["bestMatches"][i]["1. symbol"]}>${result.data["bestMatches"][i]["1. symbol"]}:  ${result.data["bestMatches"][i]["2. name"]}</option>`;
         }
     } 
     update +=`</select></div>`;
@@ -118,6 +125,17 @@ export async function updateValue(){
 }
     }
 }
+
+export async function changeFucntion(event){
+    $('#mo').replaceWith(`<div id = "mo"></div>`);
+    $('#enter').val(event.target.value);
+    
+
+}
+// export function getChange(event){
+//     return event
+// }
+
 export const renderSite = function() {
     const $root = $('#root');
     //const $root = $('#root');
@@ -127,8 +145,12 @@ export const renderSite = function() {
     $(document).on('click', '#findDate', generateDates);
     
     enter.addEventListener('input', updateValue);
+    $(document).on('click', 'option',changeFucntion);
+    
    
 }
+
+
 
 
 $(function(){
