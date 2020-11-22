@@ -158,7 +158,8 @@ export async function generateFeed(e) {
         method: 'get',                                                                                         
         url: 'https://gnews.io/api/v4/search?q='+ticker+'&lang=en&country=us&in=title,description,content&from='+priorDate+'T22:34:26Z&to='+buttonDate+'T22:34:26Z&sortBy=relevance&token='+myKey,
         // withCreditals: true                                                                                 
-    });                                                                                                                     
+    });  
+    console.log(feed);                                                                                                                  
     console.log(feed);
     let posts = `<div id=articles>`;
     if(feed.data.articles.length>0){
