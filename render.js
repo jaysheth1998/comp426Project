@@ -86,7 +86,7 @@ export function dateButtons(x){
 
 
 export async function updateValue(){
-    let update = `<div class="select is-multiple"><select id = "mo" multiple size="5">`;
+    let update = `<div id = "mo" class="select is-multiple"><select  multiple size="5">`;
 
     
     let progress = document.getElementById("ticker").value;
@@ -115,11 +115,17 @@ export async function updateValue(){
     $('#mo').replaceWith(update);
 }
     }
+    else{
+        changeFucntion();
+    }
 }
 
 export async function changeFucntion(event){
-    $('#mo').replaceWith(`<div id = "mo"></div>`);
-    $('#ticker').val(event.target.value);
+
+   
+        $('#mo').replaceWith(`<div id = "mo"></div>`);
+        $('#ticker').val(event.target.value);
+    //$('#ticker').val(event.target.value);
     
 
 }
@@ -221,6 +227,9 @@ export const renderSite = function() {
     $(document).on('click', 'option',changeFucntion);
     $(document).on('click','.thisButton', generateFeed);
     $(document).on('click','.thatButton', printValue);
+
+    let value = document.getElementById('ticker').value;
+    
     //$(document).on('click','#clearNews', clearPage);
     
    
