@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="node_modules/bulma/css/bulma.css" />
-    <link rel="stylesheet" href="custom_style.css"/>
     <link href="https://fonts.googleapis.com/css?family=Shrikhand&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>426 Project</title>
 </head>
 <body>
@@ -33,19 +33,29 @@
                 </select>
               </span>
             </p>
+<<<<<<< HEAD
             <p class="control" id = "crazyVibes" >
               <input class="input" type="text" placeholder="Stock Ticker (eg. AAPL)" id = "enter">
               <select id = "mo"></select>
               <div id = "yo"></div>
+=======
+            <p class="control">
+              <input class="input" id="ticker" type="text" placeholder="Stock Ticker (eg. AAPL)">
+>>>>>>> b99650cbe0306995bbf874a11a944d5f2b062477
             </p>
             
             <p class="control">
+<<<<<<< HEAD
               <a class="button is-primary" id="findDate">
+=======
+              <a class="button is-primary" id="generate">
+>>>>>>> b99650cbe0306995bbf874a11a944d5f2b062477
                 Search For News
               </a>
             </p>
             
           </div>
+<<<<<<< HEAD
           
           
 
@@ -57,5 +67,23 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="node_modules/axios/dist/axios.min.js"></script>
 <script type="module" src="render.js"></script>
+=======
+    </div>
+</section>
+
+<br>
+
+<section class="section">
+    <div class="container">
+        <div class="column is-two-thirds">
+            <div id="newsFeed"></div> 
+        </div> 
+    </div>
+</section> 
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="node_modules/axios/dist/axios.js"></script>
+    <script type="module" src="newsFeedRender.js"></script>
+>>>>>>> b99650cbe0306995bbf874a11a944d5f2b062477
 </body>
+
 </html>
