@@ -19,22 +19,6 @@ export async function generateDates(e) {
       });
       console.log(result);
     
-      //console.log(result.data["Weekly Time Series"]);
-
-      //console.log(result.data["Time Series (Daily)"]["2020-07-02"]);
-      //var d = new Date("2020-07-01");
-      //var x = new Date("2020-11-21");
-      //x = x.toISOString();
-      //console.log(x);
-      //var s = d.toISOString().substring(0,10);
-      //console.log(s);
-      //d.setDate(d.getDate()+1);
-      //s = d.toISOString().substring(0,10);
-      //console.log(s);
-      //s = "2020-07-02"
-      //console.log(s);
-      //console.log(result.data["Time Series (Daily)"][s]);
-
       let dateArr = [];
       let exportArr =[];
       var d = new Date();
@@ -87,15 +71,15 @@ export async function generateDates(e) {
 
 
 export function dateButtons(x){
-    let dateButtonList  = `<div>`;
+    let dateButtonList  = ``;
 
     for(let i =0; i <x.length; i++){
         
         let oneButton = x[i];
-        dateButtonList+=`<button class = "thisButton" id = "${oneButton}">${oneButton}</button>`;
+        dateButtonList+=`<button class ="button is-rounded thisButton" id = "${oneButton}">${oneButton}</button>`;
 
     }
-    dateButtonList+=`</div>`;
+    //dateButtonList+=`</div>`;
     $('#listOfButtons').append(dateButtonList);
 
 }
@@ -165,6 +149,10 @@ export async function generateFeed(e) {
 
     let ticker = document.getElementById('ticker').value;
     console.log(ticker)
+    let valuesArr = []
+    valuesArr.push(ticker);
+    valuesArr.push(buttonDate);
+
 
     const feed = await axios({
         method: 'get',                                                                                         
@@ -176,8 +164,9 @@ export async function generateFeed(e) {
     if(feed.data.articles.length>0){
         for(let i = 0; i < feed.data.articles.length; i++) {
             if( feed.data.articles[i].title!=null && feed.data.articles[i].image!=null && feed.data.articles[i].description!= null && feed.data.articles[i].source != null) {
- 
+            valuesArr.push(feed.data.articles[i].url)
             posts += `
+            <div class="box">
             <div class="card">
                 <header class="card-header">
                     <h1 class="title"><a href="${feed.data.articles[i].url}" target="_blank">${feed.data.articles[i].title}</a></h1>
@@ -193,12 +182,12 @@ export async function generateFeed(e) {
                     </div>
                 </div>
                 <footer class="card-footer">
-                    <a href="${feed.data.articles[i].source.url} target="_blank" class="card-footer-item">Source: ${feed.data.articles[i].source.name}</a>
-                    <form method="get" name="form2" action="home.php"> 
-                        <a class="card-footer-item"><button name="save" type="submit"  value="${feed.data.articles[i].url}">Save Article <span class="icon is-medium"><i class="fa fa-heart"></i></span></button></a>
-                    </form>
+                    <a href="${feed.data.articles[i].source.url} class="card-footer-item" target="_blank">Source: ${feed.data.articles[i].source.name}</a>
+                        <a class="card-footer-item"><button class="thatButton" name="save" type="submit"  value="${valuesArr}">Save Article <span class="icon is-medium"><i class="fa fa-heart"></i></span></button></a>
                 </footer>
             </div>
+            </div>
+            <br>
             `
                 } 
         }
@@ -207,7 +196,17 @@ export async function generateFeed(e) {
     }
     posts += `</div>`;
     $root.append(posts);
+    valuesArr.pop();
 }
+
+export const printValue = function(e) {
+    console.log(e.target.value);
+}
+
+// export const clearPage = function() {
+//     $('#listOfButtons').empty();
+//     $('#newsFeed').empty();
+// }
 
 export const renderSite = function() {
     //const $root = $('#root');
@@ -216,10 +215,12 @@ export const renderSite = function() {
 
     
     $(document).on('click', '#findDate', generateDates);
-    
-    ticker.addEventListener('input', updateValue);
+    $(document).on('input','#ticker', updateValue);
+    //ticker.addEventListener('input', updateValue);
     $(document).on('click', 'option',changeFucntion);
     $(document).on('click','.thisButton', generateFeed);
+    $(document).on('click','.thatButton', printValue);
+    //$(document).on('click','#clearNews', clearPage);
     
    
 }

@@ -64,7 +64,7 @@ export async function generateNewsFeed(e) {
                 <footer class="card-footer">
                     <a href="${feed.data.articles[i].source.url} target="_blank" class="card-footer-item">Source: ${feed.data.articles[i].source.name}</a>
                     <form method="get" name="form2" action="home.php"> 
-                        <a class="card-footer-item"><button name="save" type="submit"  value="${feed.data.articles[i].url}">Save Article <span class="icon is-medium"><i class="fa fa-heart"></i></span></button></a>
+                        <a class="card-footer-item"><button name="save" type="submit"  value="${feed.data.articles[i].url}, ">Save Article <span class="icon is-medium"><i class="fa fa-heart"></i></span></button></a>
                     </form>
                 </footer>
             </div>
