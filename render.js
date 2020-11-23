@@ -202,7 +202,7 @@ export async function generateFeed(e) {
     //const myKey = "480cae414ceb43cbab94d9ab001bd7ec"
 
     // SERVER RUN
-    const myKey = "c97e329f04a9821fe41a8f8bde77b7e6"
+    const myKey = "58066874211fc9b8944837531d09d4c5"
 
     let ticker = document.getElementById('ticker').value;
     console.log(ticker)
